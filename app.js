@@ -1,107 +1,101 @@
-$(function () {
+$(document).ready(function () {
 
-    const displayInfo = function () {
+    function clearFields() {
+        $('#searchInput').val("");
+        $('#startYearInput').val("");
+        $('#endYearInput').val("");
+        console.log($('#searchInput').val());
+
+    }
+
+    const search = function() {
+        const apikey = "d413b797e2ef42889944fd71f193f81b";
+        const searchInput = $('#searchInput').val();
+        const numberTerm = $('option:selected').val();
+        const startYearInput = $('#startYearInput').val() + `0101`;
+        const endYearInput = $('#endYearInput').val() + `1231`;
+
+        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+
+        url += '?' + $.param({
+            'api-key': apikey,
+            'q': searchinput,
+            'begin_date': startYearInput,
+            'end_date': endYearInput,
+            'page' : 0,
+        });
+
         $.ajax({
-            url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=6ccb734888db4a05bdc082173279ab87',
+            url: url,
             method: 'GET'
-        }).then(function (response) {
-            console.log(response)
+        }).done(function (response) {
+    
+    const sectionBody = $('#newsFeed');
+    sectionBody.html("");
+    // Section for ajax responses
+//////////////////////////////////////
+////////////////////////////////////
+////////////////////////////////
+////////////////////////////////////
+////////////////////
+    //Section for ajax responses
 
+        }].fail(function (err) {
+            throw err;
+        });
+    };
+    //Eventhandlers//
+    $('#searchButton').on('click', search);
+    $('#clearButton').on('click', clearFields);
 
-            const resultDiv = $('<div>').addClass('result');
+    $(document).ready(function () {
 
-            const articleHeadline = response.response.docs[0].headline.main;
-
-            const headlineHolder = $('<p>').text(`<h4>${articleHeadline}</h4>`);
-            resultDiv.append(headlineHolder);
-
-            const author = response.docs[0].headline.name;
-
-            const authorHolder = $('<p>').text(`<h4>${author}</h4>`);
-            resultDiv.append(authorHolder);
-
-            const date = response.docs[0].multimedia.pub_date;
-            const dateHolder = $('<p>').text(`<h4>${date}</h4>`);
-
-            console.log(date);
-
-        })
-    }
-
-
-
-
-    const selectVal = function () {
-        const val1 = $('#selectOptions').text();
-        console.log(val1);
-    }
-
-    $('#search').on('click', selectVal)
-
-    render();
-
-
-    const selectEmpty = function () {
-        $('#selectOptions').empty();
-        console.log(selectEmpty);
-    }
-
-
-    $("#articleArea").append(div)
-
-    // $("#clear").click(function () {
-    //     $("#articleArea").empty();
-
-    //     terms = $("#searchTerms").val().trim();
-    //     terms = terms.replace(/ /g, "+");
-
-
-
-    //     $("#search").click(function () {
-    //         $("#articleArea").empty();
-    //     })
-
-    //     displayInfo();
-
-
-
-
-
-        // ======================= NOTES =========================
-        // $("#sumbit").click(function() {
-        //     $("#articleArea").empty();
-        //     terms = $("#searchTerms").val().trim();
-        //     terms = terms.replace();
-        //     numberOfArticles = $('#recordNum option:selected').val()
-        // })
-
-
-        // $("#sender").on("click", function (){
-        //     var userSearch = $("#exampleInputEmail1").val().trim();
-        //     //var userRecords = $("exampleSelect1").val().trim();
-        //     var queryURL = baseUrl + qParam + userSearch + keyParam + apiKey;
-
-
-
-
-
-
-
-
-
-
-        //     $("#search").click(function() {
-        //         $("#articleArea").empty();
-        //         terms = $("#searchTerms").val().trim();
-        //         terms = terms.replace(/ /g, "+");
-        //         numberOfArticles = $("#selectOptions option:selected").val()
-
-        // console.log( $("#searchTerms").val() )
-        // console.log( $("#recordNum option:selected").val() );
-
-        // Need to make date..
-        // beginDate = $("#startYear").val()
-        // endDate = $("#endYear").val()
-
-
+        function clearFields() {
+            $('#searchInput').val("");
+            $('#startYearInput').val("");
+            $('#endYearInput').val("");
+            console.log($('#searchInput').val());
+    
+        }
+    
+        const search = function() {
+            const apikey = "d413b797e2ef42889944fd71f193f81b";
+            const searchInput = $('#searchInput').val();
+            const numberTerm = $('option:selected').val();
+            const startYearInput = $('#startYearInput').val() + `0101`;
+            const endYearInput = $('#endYearInput').val() + `1231`;
+    
+            var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    
+            url += '?' + $.param({
+                'api-key': apikey,
+                'q': searchinput,
+                'begin_date': startYearInput,
+                'end_date': endYearInput,
+                'page' : 0,
+            });
+    
+            $.ajax({
+                url: url,
+                method: 'GET'
+            }).done(function (response) {
+        
+        const sectionBody = $('#newsFeed');
+        sectionBody.html("");
+        // Section for ajax responses
+    //////////////////////////////////////
+    ////////////////////////////////////
+    ////////////////////////////////
+    ////////////////////////////////////
+    ////////////////////
+        //Section for ajax responses
+    })
+        }].fail(function (err) {
+        throw err;
     });
+    };
+        //Eventhandlers//
+    $('#searchButton').on('click', search);
+    $('#clearButton').on('click', clearFields);
+
+
