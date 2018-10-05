@@ -34,7 +34,6 @@ $("#sumbit").click(function() {
 
 const searchRecords = function () {}
 
-
     const val1 = $('#val1').val();
     const val2 = $('#val2').val();
     const val3 = $('#val3').val ();

@@ -1,28 +1,28 @@
-const displayInfo = function () {
-    $.ajax ({
-        url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=6ccb734888db4a05bdc082173279ab87',
-        method: 'GET'
-    }).then(function(response) {
-        console.log(response)
-    })
+const render = function (articlesArray) {
+    for (let i = 0; i < articlesArray.length; i++) {
+        let headline = articlesArray[i].headline.main;
+        let date = articlesArray[i].pub_date;
 
-    const search = function () {
-        response.forEach(function(word, i) {
-            dict[word] = i;
-        });
+        $('#test').append(`<h4>${headline}</h4>`);
+        $('#test').append(date);
     }
-}
+};
 
-const resultDiv = $('<div>').addClass('result');
+const displayInfo = function () {
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    url += '?' + $.param({
+        'api-key': "6ccb734888db4a05bdc082173279ab87",
+        'q': "terms",
+        'begin_date': "20170101",
+        'end_date': "20181005"
+    });
+    $.ajax({
+        url: url,
+        method: 'GET'
+    }).then(function (response) {
+        let array = response.response.docs;
+        render(array);
+    })
+};
 
-const articleHeadline = response.docs.[0].headline.main;
-const headlineHolder = $('<p>').text(`<h4>${articleHeadline}</h4>`);
-resultDiv.append(headlineHolder);
-
-const author = response.docs.[0].headline.name;
-const authorHolder = $('<p>').text(`<h4>${author}</h4>`);
-resultDiv.append(authorHolder);
-
-const date = response.docs.[0].multimedia.pub_date;
-const dateHolder = $('<p>').text(`<h4>${date}</h4>`);
-
+$('#search').on('click', displayInfo());
